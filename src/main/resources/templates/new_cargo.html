@@ -7,8 +7,26 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="../static/styles.css">
 </head>
+<style>
+  body {
+    background-image: url('https://almamater13.ru/800/600/http/kartinkof.club/uploads/posts/2022-04/1650009984_36-kartinkof-club-p-kartinki-dalnoboishchikov-prikolnie-37.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  .container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  .btn-home {
+    margin-right: auto; /* Размещаем кнопку "Главная" справа */
+  }
+</style>
 <body>
-<a th:href="@{/}">Главная</a>
 <div class="container mt-5">
   <h2>Добавление кото-груза</h2>
 
@@ -40,6 +58,7 @@
         <input type="date" class="form-control" id="arrivalDate" th:field="*{arrivalDate}" required>
       </div>
       <button type="submit" class="btn btn-primary btn-pink">КОТО-КНОПКА добавить кото-грузик</button>
+      <a href="/" class="btn btn-primary btn-home">Вернуться на главную страницу</a>
     </form>
 </div>
 
