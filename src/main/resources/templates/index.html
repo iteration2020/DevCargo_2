@@ -1,31 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мииииии</title>
-    <!-- Подключение стилей Bootstrap для красивого оформления формы -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../static/styles.css"> <!-- Добавление вашего стилевого файла -->
-</head>
-<body>
-<a th:href="@{/}">Главная</a>
+    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+    <style>
+        body {
+            background-image: url('https://img.goodfon.ru/wallpaper/nbig/e/8f/koshki-kotiata-britanskie-gruzovik-igrushka-mashina.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
 
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .table {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn {
+            margin-top: 10px;
+        }
+
+        /* Добавленные стили для header */
+        header {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+        }
+
+        .nav-link {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            color: #0056b3;
+        }
+
+        .btn-auth {
+            margin-left: 10px;
+        }
+
+        .btn-register {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
 <div class="container mt-5">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <header class="d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom">
         <ul class="nav col-12 col-md-auto mb-2">
-            <li><a href="/new" class="nav-link px-2 link-secondary">Добавить груз</a></li>
+            <li><a href="/" class="nav-link px-2 link-secondary">Главная страница</a></li>
+            <li><a href="/new" class="nav-link px-2 link-secondary">Добавить кото-груз</a></li>
             <li><a href="/blog/posts" class="nav-link px-2 link-secondary">Перейти к блогу</a></li>
         </ul>
 
-        <div class="col-md-3 text-end" sec:authorize="!isAuthenticated()">
-            <a th:href="@{/login}" type="button" class="btn btn-outline-primary me-2">Login</a>
-            <a th:href="@{/register}" type="button" class="btn btn-primary">Sign-up</a>
-        </div>
-        <div class="col-md-3 text-end" sec:authorize="isAuthenticated()">
-            <a th:href="@{/logout}" type="button" class="btn btn-outline-primary me-2">Logout</a>
+        <div class="col-md-3 d-flex justify-content-end align-items-center">
+            <div class="text-end" sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}" type="button" class="btn btn-outline-primary btn-auth">Логин</a>
+                <a th:href="@{/register}" type="button" class="btn btn-primary btn-auth btn-register">Регистрация</a>
+            </div>
+            <div class="text-end" sec:authorize="isAuthenticated()">
+                <a th:href="@{/logout}" type="button" class="btn btn-outline-primary btn-auth">Выйти</a>
+            </div>
         </div>
     </header>
+
     <h2>Грустные котята че-то пытаются решить с грузами</h2>
 
     <!-- Форма для фильтрации -->
@@ -73,13 +126,13 @@
         <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Departure City</th>
-            <th scope="col">Departure Date</th>
-            <th scope="col">Arrival City</th>
-            <th scope="col">Arrival Date</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Наименование</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Город отправления</th>
+            <th scope="col">Дата отправления</th>
+            <th scope="col">Город прибытия</th>
+            <th scope="col">Дата прибытия</th>
+            <th scope="col">Действие</th>
         </tr>
         </thead>
         <tbody>
@@ -94,7 +147,7 @@
             <td th:text="${#temporals.format(cargo.arrivalDate, 'yyyy-MM-dd')}"></td>
             <td>
                 <a th:href="@{'/edit/{id}'(id=${cargo.id})}" class="btn btn-warning btn-sm">Правка</a>
-                <form action="#" method="POST" class="btn btn-danger btn-sm" onclick="return confirm('Уверен?')" th:action="@{'/delete/{id}'(id=${cargo.id})}"><button>Delete</button></form>
+                <form action="#" method="POST" class="btn btn-danger btn-sm" onclick="return confirm('Уверен?^^')" th:action="@{'/delete/{id}'(id=${cargo.id})}">Удалить</form>
             </td>
         </tr>
         </tbody>
@@ -105,8 +158,8 @@
     <table class="table mt-3">
         <thead>
         <tr>
-            <th scope="col">Count</th>
-            <th scope="col">Date</th>
+            <th scope="col">Количество</th>
+            <th scope="col">Дата</th>
         </tr>
         </thead>
         <tbody>
