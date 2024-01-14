@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мииииии</title>
+    <!-- Подключение стилей Bootstrap для красивого оформления формы -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/styles.css"> <!-- Добавление вашего стилевого файла -->
+</head>
+<body>
+<a th:href="@{/}">Главная</a>
+<div class="container mt-5">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <ul class="nav col-12 col-md-auto mb-2">
+            <li><a th:href="@{/blog/posts/new}" class="nav-link px-2 link-secondary">Добавить</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end" sec:authorize="!isAuthenticated()">
+            <a th:href="@{/login}" type="button" class="btn btn-outline-primary me-2">Login</a>
+            <a th:href="@{/register}" type="button" class="btn btn-primary">Sign-up</a>
+        </div>
+        <div class="col-md-3 text-end" sec:authorize="isAuthenticated()">
+            <a th:href="@{/logout}" type="button" class="btn btn-outline-primary me-2">Logout</a>
+        </div>
+    </header>
+    <h2>Грустные котята че-то пытаются решить с постами в блоге</h2>
+
+    <!-- Таблица для отображения грузов -->
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Content</th>
+            <th scope="col">Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Вставка данных с использованием Thymeleaf -->
+        <tr th:each="post : ${blogPosts}">
+            <td th:text="${post.getId()}"></td>
+            <td th:text="${post.getTitle()}"></td>
+            <td th:text="${post.getContent()}"></td>
+            <td th:text="${#temporals.format(post.getDate(), 'yyyy-MM-dd')}"></td>
+            <td>
+                <a th:href="@{'/blog/posts/edit/{id}'(id=${post.getId()})}" class="btn btn-warning btn-sm">Правка</a>
+                <form action="#" method="POST" class="btn btn-danger btn-sm" onclick="return confirm('Уверен?')" th:action="@{'/blog/posts/delete/{id}'(id=${post.getId()})}"><button>Delete</button></form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Подключение скриптов Bootstrap и вашего собственного JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

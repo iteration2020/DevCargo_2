@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мииииии</title>
+    <!-- Подключение стилей Bootstrap для красивого оформления формы -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/styles.css"> <!-- Добавление вашего стилевого файла -->
+</head>
+<body>
+<a th:href="@{/}">Главная</a>
+
+<div class="container mt-5">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <ul class="nav col-12 col-md-auto mb-2">
+            <li><a href="/new" class="nav-link px-2 link-secondary">Добавить груз</a></li>
+            <li><a href="/blog/posts" class="nav-link px-2 link-secondary">Перейти к блогу</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end" sec:authorize="!isAuthenticated()">
+            <a th:href="@{/login}" type="button" class="btn btn-outline-primary me-2">Login</a>
+            <a th:href="@{/register}" type="button" class="btn btn-primary">Sign-up</a>
+        </div>
+        <div class="col-md-3 text-end" sec:authorize="isAuthenticated()">
+            <a th:href="@{/logout}" type="button" class="btn btn-outline-primary me-2">Logout</a>
+        </div>
+    </header>
+    <h2>Грустные котята че-то пытаются решить с грузами</h2>
+
+    <!-- Форма для фильтрации -->
+    <div class="card">
+        <div class="card-body">
+            <form action="/" method="get">
+                <div class="form-group">
+                    <label for="filterDate">Фильтр по КОТО-ДАТЕ!:</label>
+                    <input type="date" class="form-control" id="filterDate" name="date">
+                </div>
+                <div class="form-group">
+                    <label for="keywordFilter">Поиск!:</label>
+                    <input type="text" class="form-control" id="keywordFilter" name="keyword">
+                </div>
+                <button type="submit" class="btn btn-primary btn-pink">Фильтровать:3</button>
+                <a href="/" class="btn btn-primary btn-pink">Сбросить:3</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- Форма для фильтрации -->
+    <div class="card mt-2">
+        <div class="card-body">
+            <form action="/" method="get">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sorting" value="desc" id="flexRadioDefault1" checked>
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Сортировать по убыванию
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sorting" value="asc" id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Сортировать по возрастанию
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-pink">Сортировать</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Таблица для отображения грузов -->
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Departure City</th>
+            <th scope="col">Departure Date</th>
+            <th scope="col">Arrival City</th>
+            <th scope="col">Arrival Date</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Вставка данных с использованием Thymeleaf -->
+        <tr th:each="cargo : ${listCargo}">
+            <td th:text="${cargo.id}"></td>
+            <td th:text="${cargo.name}"></td>
+            <td th:text="${cargo.content}"></td>
+            <td th:text="${cargo.departureCity}"></td>
+            <td th:text="${#temporals.format(cargo.departureDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${cargo.arrivalCity}"></td>
+            <td th:text="${#temporals.format(cargo.arrivalDate, 'yyyy-MM-dd')}"></td>
+            <td>
+                <a th:href="@{'/edit/{id}'(id=${cargo.id})}" class="btn btn-warning btn-sm">Правка</a>
+                <form action="#" method="POST" class="btn btn-danger btn-sm" onclick="return confirm('Уверен?')" th:action="@{'/delete/{id}'(id=${cargo.id})}"><button>Delete</button></form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <p>Количество грузов за день</p>
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th scope="col">Count</th>
+            <th scope="col">Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Вставка данных с использованием Thymeleaf -->
+        <tr th:each="cargo : ${cargoCountByDate}">
+            <td th:text="${cargo.getCount()}"></td>
+            <td th:text="${cargo.getDepartureDate()}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>Гистограмма</p>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+
+<!-- Подключение скриптов Bootstrap и вашего собственного JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script th:inline="javascript">
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [[${chartDates.split(',')}]],
+            datasets: [{
+                label: '# of Date',
+                data: [[${chartCounts.split(',')}]],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

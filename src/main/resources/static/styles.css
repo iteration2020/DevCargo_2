@@ -1,0 +1,16 @@
+.btn-pink {
+    background-color: #ff69b4; /* Розовый цвет в формате HEX */
+    border-color: #ff69b4; /* Цвет обводки кнопки */
+    color: #ffffff; /* Цвет текста кнопки (белый) */
+    padding: 10px 20px; /* Внутренние отступы кнопки */
+    font-size: 16px; /* Размер шрифта текста кнопки */
+    border-radius: 5px; /* Закругление углов кнопки */
+    cursor: pointer; /* Изменение формы указателя при наведении */
+}
+
+body {
+    background-image: url('https://celes.club/uploads/posts/2023-03/1679409642_celes-club-p-belie-kotyata-oboi-29.jpg'); /* Замените 'path/to/your/image.jpg' на путь к вашему изображению */
+    background-size: cover; /* Масштабирование изображения, чтобы оно полностью покрывало фон */
+    background-repeat: no-repeat; /* Запрет повторения изображения */
+    color: #ffffff; /* Цвет текста на фоне изображения (белый) */
+}

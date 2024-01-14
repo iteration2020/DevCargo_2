@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Добавление кото-груза</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/styles.css">
+</head>
+<body>
+<a th:href="@{/}">Главная</a>
+<div class="container mt-5">
+  <h2>Добавление кото-груза</h2>
+
+  <!-- Форма для добавления груза -->
+  <form th:action="@{/save}" th:object="${cargo}" method="post">
+    <form th:action="@{/save}" th:object="${cargo}" method="post">
+      <div class="form-group">
+        <label for="cargoName">Имя кото-груза:</label>
+        <input type="text" class="form-control" id="cargoName" th:field="*{name}" required>
+      </div>
+      <div class="form-group">
+        <label for="cargoDescription">Описание кото-груза:</label>
+        <textarea class="form-control" id="cargoDescription" th:field="*{content}"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="departureCity">Кото-город отправки:</label>
+        <input type="text" class="form-control" id="departureCity" th:field="*{departureCity}" required>
+      </div>
+      <div class="form-group">
+        <label for="departureDate">Отправление кото-груза:</label>
+        <input type="date" class="form-control" id="departureDate" th:field="*{departureDate}" required>
+      </div>
+      <div class="form-group">
+        <label for="arrivalCity">Кото-город прибытия:</label>
+        <input type="text" class="form-control" id="arrivalCity" th:field="*{arrivalCity}" required>
+      </div>
+      <div class="form-group">
+        <label for="arrivalDate">Прибытие кото-груза:</label>
+        <input type="date" class="form-control" id="arrivalDate" th:field="*{arrivalDate}" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-pink">КОТО-КНОПКА добавить кото-грузик</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>
