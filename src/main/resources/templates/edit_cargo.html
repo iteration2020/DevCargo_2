@@ -1,18 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <title>Система работы со студентами | Редактирование студента</title>
+    <title>Редактирование кото-груза</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            background-image: url('https://kartinki.pics/pics/uploads/posts/2022-09/1662843307_12-kartinkin-net-p-kot-na-dibakh-vkontakte-14.jpg'); /* Замените 'https://your-image-url.jpg' на URL вашего изображения */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .blockquote {
+            color: black;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            width: 100%;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        form input[type="text"],
+        form input[type="date"],
+        form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #218838;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
 </head>
+
 <body>
-<a th:href="@{/}">Главная</a>
-<div class="bg-image"
-     style="background-image: url('https://palchevsky.ru/images/background.jpg'); height: 100vh; overflow: auto">
-    <blockquote class="blockquote text-center"><h1>Редактирование студента факультета ИТиАБД</h1></blockquote>
-    <div class="row">
-        <div class="col-md-8 offset-md-4">
+<div class="container mt-5">
+    <blockquote class="blockquote text-center">
+        <h1>Редактирование груза</h1>
+    </blockquote>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
             <form th:action="@{/save}" th:object="${cargo}" method="post">
                 <input hidden type="text" class="form-control" id="id" th:field="*{id}" required>
                 <div class="form-group">
@@ -39,10 +97,18 @@
                     <label for="arrivalDate">Прибытие кото-груза:</label>
                     <input type="date" class="form-control" id="arrivalDate" th:field="*{arrivalDate}" required>
                 </div>
-                <button type="submit" class="btn btn-primary btn-pink">КОТО-КНОПКА добавить кото-грузик</button>
+                <button type="submit" class="btn btn-primary btn-pink">КОТО-КНОПКА редактировать кото-грузик</button>
             </form>
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-EzAdomU7dzC+RyZxVcz2vP9flkOxDPT3cUtObtbfMCxF5/xqOhUzpOw2hAY2Uvme"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-J1Ih6Qn4tJ1UfQF54lFYFkzHdSNECwIkP5YAS5wxrXYjFqEq5bAn4IZmOSDS/j9" crossorigin="anonymous"></script>
+
 </body>
 </html>
