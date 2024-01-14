@@ -147,7 +147,7 @@
             <td th:text="${#temporals.format(cargo.arrivalDate, 'yyyy-MM-dd')}"></td>
             <td>
                 <a th:href="@{'/edit/{id}'(id=${cargo.id})}" class="btn btn-warning btn-sm">Правка</a>
-                <form action="#" method="POST" class="btn btn-danger btn-sm" onclick="return confirm('Уверен?^^')" th:action="@{'/delete/{id}'(id=${cargo.id})}">Удалить</form>
+                <form action="#" method="POST" onclick="return confirm('Уверен?^^')" th:action="@{'/delete/{id}'(id=${cargo.id})}"><button class="btn btn-danger btn-sm" type="submit">Удалить</button></form>
             </td>
         </tr>
         </tbody>
