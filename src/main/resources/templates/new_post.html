@@ -1,28 +1,54 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Добавление кото-поста</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="../static/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавление кото-поста</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+    <style>
+        body {
+            background-color: #f8d7da; /* Розовый фон */
+        }
+        h2 {
+            color: #721c24; /* Темно-красный цвет текста */
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Белый полупрозрачный фон */
+            border: 1px solid #ddd; /* Рамка вокруг контейнера */
+            padding: 20px; /* Отступ внутри контейнера */
+            border-radius: 10px; /* Скругление углов контейнера */
+            margin-top: 20px; /* Промежуток между контейнером и остальным контентом */
+        }
+        .form-group {
+            margin-bottom: 20px; /* Промежуток между формными группами */
+        }
+        .btn-primary.btn-pink {
+            background-color: rgba(255, 255, 255, 0.8); /* Белый полупрозрачный фон кнопки */
+            color: #721c24; /* Темно-красный цвет текста кнопки */
+            border: 1px solid #721c24; /* Темно-красная рамка кнопки */
+        }
+        .btn-primary.btn-pink:hover {
+            background-color: #721c24; /* Темно-красный фон кнопки при наведении */
+            color: #fff; /* Белый цвет текста кнопки при наведении */
+        }
+    </style>
 </head>
 <body>
-<a th:href="@{/}">Главная</a>
 <div class="container mt-5">
-  <h2>Добавление кото-поста</h2>
+    <h2>Добавление кото-поста</h2>
 
-  <!-- Форма для добавления поста -->
-  <form th:action="@{/blog/posts/save}" th:object="${blogPost}" method="post">
-      <div class="form-group">
-        <label for="blogPostName">Заголовок кото-поста:</label>
-        <input type="text" class="form-control" id="blogPostName" th:field="*{title}" required>
-      </div>
-      <div class="form-group">
-        <label for="blogPostContent">Описание кото-поста:</label>
-        <textarea class="form-control" id="blogPostContent" th:field="*{content}"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary btn-pink">КОТО-КНОПКА добавить кото-постик</button>
+    <!-- Форма для добавления поста -->
+    <form th:action="@{/blog/posts/save}" th:object="${blogPost}" method="post">
+        <div class="form-group">
+            <label for="blogPostName">Заголовок кото-поста:</label>
+            <input type="text" class="form-control" id="blogPostName" th:field="*{title}" required>
+        </div>
+        <div class="form-group">
+            <label for="blogPostContent">Описание кото-поста:</label>
+            <textarea class="form-control" id="blogPostContent" th:field="*{content}"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-pink">КОТО-КНОПКА добавить кото-постик</button>
     </form>
 </div>
 
