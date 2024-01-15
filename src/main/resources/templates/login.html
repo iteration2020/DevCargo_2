@@ -4,15 +4,33 @@
 >
 <head>
     <meta charset="UTF-8">
-    <title>ГРУЗЫЫЫ</title>
+    <title>Вход в учетную котозапись</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('https://gas-kvas.com/grafic/uploads/posts/2023-10/1696422778_gas-kvas-com-p-kartinki-milie-kotyat-21.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.8); /* Прозрачный белый фон */
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-<a th:href="@{/}">Главная</a>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" th:fragment="header">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}">ГРУЗЫЫЫ</a>
+        <a class="navbar-brand" th:href="@{/}">Грузы, грузы, грузики...</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -25,14 +43,14 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div th:if="${param.error}">
-                <div class="alert alert-danger">Invalid Email and Password.</div>
+                <div class="alert alert-danger">Неверный логин или пароль.</div>
             </div>
             <div th:if="${param.logout}">
-                <div class="alert alert-success">You have been logged out.</div>
+                <div class="alert alert-success">Вы вышли из учетной записи :( Ну ты это... заходи если че!</div>
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h3 class="text-center">Login Form</h3>
+                    <h3 class="text-center">Вход в учетную котозапись</h3>
                 </div>
                 <div class="card-body">
                     <form
@@ -42,29 +60,29 @@
                             role="form"
                     >
                         <div class="mb-3">
-                            <label for="username" class="control-label">Email *</label>
+                            <label for="username" class="control-label">E-mail *</label>
                             <input type="text"
                                    id="username"
                                    name="username"
                                    class="form-control"
-                                   placeholder="Email"
+                                   placeholder="E-mail"
                             />
                         </div>
 
                         <div class="mb-3">
-                            <label for="password" class="control-label">Password *</label>
+                            <label for="password" class="control-label">Пароль *</label>
                             <input type="password"
                                    id="password"
                                    name="password"
                                    class="form-control"
-                                   placeholder="Password"
+                                   placeholder="Пароль"
                             />
                         </div>
 
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-primary">Login</button>
-                            <span> Not registered?
-                            <a th:href="@{/register}"> Register/SignUp Here</a>
+                            <button type="submit" class="btn btn-primary">Войти</button>
+                            <span> Нет аккаунта?
+                            <a th:href="@{/register}"> Создать аккаунт</a>
                         </span>
                         </div>
                     </form>
