@@ -3,37 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мииииии</title>
+    <title>Блог, пост, божепоможи</title>
     <!-- Подключение стилей Bootstrap для красивого оформления формы -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/styles.css"> <!-- Добавление вашего стилевого файла -->
+    <style>
+        /* Добавление пользовательских стилей */
+        body {
+            background-color: #f8d7da; /* Розовый фон */
+        }
+        header.navbar {
+            background-color: #f8d7da; /* Розовый фон для навигационной панели */
+        }
+        h2 {
+            color: #721c24; /* Темно-красный цвет текста */
+        }
+        .nav-link, .btn-exit {
+            background-color: rgba(255, 255, 255, 0.8); /* Белый полупрозрачный фон */
+            color: #721c24; /* Темно-красный цвет текста */
+            border: 1px solid #721c24; /* Темно-красная рамка */
+            margin-right: 10px; /* Промежуток между кнопками */
+            margin-left: 20px; /* Промежуток между кнопками (для кнопки "Выйти") */
+        }
+        .btn-warning.btn-sm {
+            /* Делаем размер кнопки "Изменить" таким же, как у кнопки "Удалить" */
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+        }
+        table {
+            background-color: rgba(255, 255, 255, 0.8); /* Белый полупрозрачный фон для таблицы */
+            border: 1px solid #ddd; /* Рамка вокруг таблицы */
+            margin-top: 20px; /* Промежуток между таблицей и остальным контентом */
+        }
+    </style>
 </head>
 <body>
-<a th:href="@{/}">Главная</a>
 <div class="container mt-5">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <header class="navbar d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom">
         <ul class="nav col-12 col-md-auto mb-2">
-            <li><a th:href="@{/blog/posts/new}" class="nav-link px-2 link-secondary">Добавить</a></li>
+            <li><a th:href="@{/blog/posts/new}" class="nav-link px-2 link-secondary">Добавить пост</a></li>
+            <li><a th:href="@{/}" class="nav-link px-2 link-secondary">Вернуться на главную страницу</a></li>
         </ul>
 
         <div class="col-md-3 text-end" sec:authorize="!isAuthenticated()">
-            <a th:href="@{/login}" type="button" class="btn btn-outline-primary me-2">Login</a>
-            <a th:href="@{/register}" type="button" class="btn btn-primary">Sign-up</a>
+            <a th:href="@{/login}" type="button" class="btn btn-outline-primary me-2">Войти</a>
+            <a th:href="@{/register}" type="button" class="btn btn-primary">Зарегистрироваться</a>
         </div>
         <div class="col-md-3 text-end" sec:authorize="isAuthenticated()">
-            <a th:href="@{/logout}" type="button" class="btn btn-outline-primary me-2">Logout</a>
+            <a th:href="@{/logout}" type="button" class="btn-exit btn btn-outline-primary me-2">Выйти</a>
         </div>
     </header>
-    <h2>Грустные котята че-то пытаются решить с постами в блоге</h2>
+    <h2>Вполне себе веселые котята становятся блогерами :3</h2>
 
-    <!-- Таблица для отображения грузов -->
     <table class="table mt-3">
         <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Title</th>
-            <th scope="col">Content</th>
-            <th scope="col">Date</th>
+            <th scope="col">Заголовок поста</th>
+            <th scope="col">Содержание поста</th>
+            <th scope="col">Дата</th>
         </tr>
         </thead>
         <tbody>
@@ -45,7 +73,7 @@
             <td th:text="${#temporals.format(post.getDate(), 'yyyy-MM-dd')}"></td>
             <td>
                 <a th:href="@{'/blog/posts/edit/{id}'(id=${post.getId()})}" class="btn btn-warning btn-sm">Правка</a>
-                <form action="#" method="POST" class="btn btn-danger btn-sm" onclick="return confirm('Уверен?')" th:action="@{'/blog/posts/delete/{id}'(id=${post.getId()})}"><button>Delete</button></form>
+                <form action="#" method="POST" class="btn btn-danger btn-sm" onclick="return confirm('Уверен что стоит удалять?')" th:action="@{'/blog/posts/delete/{id}'(id=${post.getId()})}"><button class="btn btn-danger btn-sm" type="submit">Удалить</button></form>
             </td>
         </tr>
         </tbody>
