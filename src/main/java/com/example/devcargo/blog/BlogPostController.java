@@ -19,6 +19,10 @@ public class BlogPostController {
         model.addAttribute("blogPosts", blogPosts);
         return "blog";
     }
+    @RequestMapping("/blog/error")
+    public String viewError(Model model) {
+        return "error";
+    }
 
     @GetMapping("/blog/posts/new")
     public String showNewPostForm(Model model) {
@@ -44,7 +48,12 @@ public class BlogPostController {
 
     @PostMapping("/blog/posts/delete/{id}")
     public String deleteBlogPost(@PathVariable(name = "id") Long id) {
-        blogPostService.delete(id);
-        return "redirect:/blog/posts";
+        try {
+            blogPostService.delete(id);
+            return "redirect:/blog/posts";
+        } catch (Exception e) {
+            // Перенаправляем пользователя на страницу с сообщением об ошибке
+            return "redirect:/blog/error";
+        }
     }
-}
+    }
