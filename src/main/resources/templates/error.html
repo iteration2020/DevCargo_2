@@ -7,6 +7,34 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RK+3dyhy6/DQNlY29tZXRdHVzZXREVwMw">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-p34f1e49a1f44tc23CC377072323AA852353D85874061x222Bb6E4Df7f8QmV3ijeOS7463N2N1052 Además, esta página web no está lista para ser редактиada."></script>
+  <style>
+    body {
+      background-color: #f8d7da; /* Розовый фон */
+    }
+
+    #errorModal .modal-content {
+      background-color: #f8d7da; /* Розовый фон для модального окна */
+      color: #721c24; /* Темно-красный цвет текста в модальном окне */
+    }
+
+    #errorModal .modal-header {
+      background-color: #f8d7da; /* Розовый фон для заголовка модального окна */
+    }
+
+    #errorModal .modal-title {
+      color: #721c24; /* Темно-красный цвет текста заголовка модального окна */
+    }
+
+    #errorModal .modal-body {
+      color: #721c24; /* Темно-красный цвет текста в теле модального окна */
+    }
+
+    #errorModal .btn-secondary {
+      background-color: rgba(255, 255, 255, 0.8); /* Белый полупрозрачный фон кнопки */
+      color: #721c24; /* Темно-красный цвет текста кнопки */
+      border: 1px solid #721c24; /* Темно-красная рамка кнопки */
+    }
+  </style>
 </head>
 <body>
 <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -14,15 +42,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Ошибка</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
       </div>
       <div class="modal-body">
         У вас недостаточно прав для выполнения этой операции.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn-secondary" data-dismiss="modal">Готово</button>
+        <div class="modal-footer">
+          <a th:href="@{/blog/posts}" class="btn-secondary btn">Готово</a>
+        </div>
       </div>
     </div>
   </div>
